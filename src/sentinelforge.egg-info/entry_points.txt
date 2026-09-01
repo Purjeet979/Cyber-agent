@@ -1,0 +1,2 @@
+[console_scripts]
+sentinelforge = sentinelforge.cli:main

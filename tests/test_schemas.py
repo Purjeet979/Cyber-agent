@@ -1,7 +1,7 @@
 """Tests for schema definitions."""
 
 import pytest
-from sentinelforge.schemas import OCSFAlert, Incident, Severity, AlertStatus, Verdict
+from kalki.schemas import OCSFAlert, Incident, Severity, AlertStatus, Verdict
 
 
 class TestOCSFAlert:

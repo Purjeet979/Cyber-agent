@@ -1,8 +1,8 @@
 """Tests for alert enrichment."""
 
 import pytest
-from sentinelforge.ingest.enrichment import enrich
-from sentinelforge.schemas import OCSFAlert, Severity
+from kalki.ingest.enrichment import enrich
+from kalki.schemas import OCSFAlert, Severity
 
 
 class TestGeoIPEnrichment:

@@ -1,8 +1,8 @@
 """Tests for OCSF normalization."""
 
 import pytest
-from sentinelforge.ingest.normalizer import normalize
-from sentinelforge.schemas import Severity
+from kalki.ingest.normalizer import normalize
+from kalki.schemas import Severity
 
 
 class TestNormalization:

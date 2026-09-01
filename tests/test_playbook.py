@@ -2,11 +2,11 @@
 
 import os
 import pytest
-from sentinelforge.playbook.engine import (
+from kalki.playbook.engine import (
     Playbook, PlaybookStep, PlaybookEngine, PlaybookExecution, StepStatus,
     load_playbook,
 )
-from sentinelforge.schemas import OCSFAlert, Severity
+from kalki.schemas import OCSFAlert, Severity
 
 
 @pytest.fixture

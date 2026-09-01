@@ -3,7 +3,7 @@ requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sentinelforge"
+name = "kalki"
 version = "0.1.0"
 description = "Autonomous SOC Analyst Platform — AI-driven alert triage, log correlation, threat hunting, and incident response"
 readme = "README.md"
@@ -45,23 +45,23 @@ yaml = [
     "pyyaml>=6.0",
 ]
 all = [
-    "sentinelforge[web,cli,ml,yaml]",
+    "kalki[web,cli,ml,yaml]",
 ]
 dev = [
-    "sentinelforge[all]",
+    "kalki[all]",
     "pytest>=7.0",
     "pytest-cov>=4.0",
     "ruff>=0.4",
 ]
 
 [project.scripts]
-sentinelforge = "sentinelforge.cli:main"
+kalki = "kalki.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/cwccie/sentinelforge"
-Repository = "https://github.com/cwccie/sentinelforge"
-Issues = "https://github.com/cwccie/sentinelforge/issues"
-Documentation = "https://github.com/cwccie/sentinelforge#readme"
+Homepage = "https://github.com/cwccie/kalki"
+Repository = "https://github.com/cwccie/kalki"
+Issues = "https://github.com/cwccie/kalki/issues"
+Documentation = "https://github.com/cwccie/kalki#readme"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -79,7 +79,7 @@ line-length = 120
 select = ["E", "W", "F", "I", "N", "UP"]
 
 [tool.coverage.run]
-source = ["sentinelforge"]
+source = ["kalki"]
 
 [tool.coverage.report]
 show_missing = true

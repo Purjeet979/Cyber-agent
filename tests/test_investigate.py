@@ -1,9 +1,9 @@
 """Tests for the investigation agent."""
 
 import pytest
-from sentinelforge.investigate.agent import InvestigationAgent, IOC, investigate_alert
-from sentinelforge.schemas import OCSFAlert, Severity
-from sentinelforge.store import alert_store
+from kalki.investigate.agent import InvestigationAgent, IOC, investigate_alert
+from kalki.schemas import OCSFAlert, Severity
+from kalki.store import alert_store
 
 
 class TestIOCExtraction:

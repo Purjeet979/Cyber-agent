@@ -1,8 +1,8 @@
 """Tests for detection models."""
 
 import pytest
-from sentinelforge.models.detector import RuleEngine, AnomalyDetector, BUILTIN_RULES, DetectionRule
-from sentinelforge.schemas import OCSFAlert, Severity
+from kalki.models.detector import RuleEngine, AnomalyDetector, BUILTIN_RULES, DetectionRule
+from kalki.schemas import OCSFAlert, Severity
 
 
 class TestRuleEngine:

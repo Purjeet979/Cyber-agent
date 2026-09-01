@@ -1,9 +1,9 @@
 """Tests for the threat hunting module."""
 
 import pytest
-from sentinelforge.hunt.hunter import ThreatHunter, HuntHypothesis, hunt, HUNT_HYPOTHESES
-from sentinelforge.schemas import OCSFAlert, Severity, AlertStatus
-from sentinelforge.store import alert_store
+from kalki.hunt.hunter import ThreatHunter, HuntHypothesis, hunt, HUNT_HYPOTHESES
+from kalki.schemas import OCSFAlert, Severity, AlertStatus
+from kalki.store import alert_store
 
 
 class TestThreatHunter:

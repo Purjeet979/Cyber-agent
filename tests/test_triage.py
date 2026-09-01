@@ -1,8 +1,8 @@
 """Tests for the triage agent."""
 
 import pytest
-from sentinelforge.triage.agent import TriageAgent, triage_alert
-from sentinelforge.schemas import OCSFAlert, Severity, AlertStatus, Verdict
+from kalki.triage.agent import TriageAgent, triage_alert
+from kalki.schemas import OCSFAlert, Severity, AlertStatus, Verdict
 
 
 class TestTriageAgent:

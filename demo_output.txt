@@ -1,0 +1,128 @@
+﻿
+    ΓòöΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòù
+    Γòæ           SentinelForge v0.1.0                  Γòæ
+    Γòæ       Autonomous SOC Analyst Platform            Γòæ
+    Γòæ                                                  Γòæ
+    Γòæ   Created by Corey A. Wade (CISSP, CCIE #14124)  Γòæ
+    ΓòÜΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓò¥
+    
+
+  [Phase 1] INGESTION ΓÇö Processing 46 logs...
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+  Ingested: 5/46
+  Ingested: 10/46
+  Ingested: 15/46
+  Ingested: 20/46
+  Ingested: 25/46
+  Ingested: 30/46
+  Ingested: 35/46
+  Ingested: 40/46
+  Ingested: 45/46
+  Ingested: 46/46
+
+  [Phase 2] TRIAGE ΓÇö Classifying 46 alerts...
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Triaged: 46 | Auto-closed (benign): 0
+
+  [Phase 3] DETECTION ΓÇö Running rule engine...
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Detection rules fired: 20
+    [SF-004] Outbound Connection to Known C2: Connection to IP/domain flagged in threat intelligence
+    [SF-002] Suspicious PowerShell: Encoded or obfuscated PowerShell command detected
+    [SF-004] Outbound Connection to Known C2: Connection to IP/domain flagged in threat intelligence
+    [SF-010] Data Exfiltration Indicator: Large data transfer or unusual exfiltration channel detected
+    [SF-007] Ransomware Indicator: Ransomware-related activity detected
+
+======================================================================
+  Triage Results
+======================================================================
+
+  Total alerts: 46
+  Severity distribution:
+    [33m    MEDIUM[0m:  30 ##############################
+    [93m      HIGH[0m:   9 #########
+    [91m  CRITICAL[0m:   7 #######
+
+  Status distribution:
+            triaged: 46
+
+  Top alerts:
+    [91m[CRITICAL][0m                   C2 |       10.0.1.10 | blocked
+             ATT&CK: T1071 ΓÇö Application Layer Protocol
+    [91m[CRITICAL][0m              Malware |       10.0.1.10 | ransomware activity
+             ATT&CK: T1486 ΓÇö Data Encrypted for Impact
+    [91m[CRITICAL][0m     CredentialAccess |       10.0.1.25 | credential dumping
+             ATT&CK: T1003 ΓÇö OS Credential Dumping
+    [91m[CRITICAL][0m              Malware |       10.0.1.10 | Credential dumping tool mimikatz.exe detected acce
+             ATT&CK: T1003 ΓÇö OS Credential Dumping
+    [91m[CRITICAL][0m     Lateral Movement |       10.0.1.10 | psexec connection from compromised workstation to 
+             ATT&CK: T1021 ΓÇö Remote Services
+    [91m[CRITICAL][0m              Malware |       10.0.1.10 | CVE-2024-1234 exploit attempt: local privilege esc
+             ATT&CK: T1068 ΓÇö Exploitation for Privilege Escalation
+    [91m[CRITICAL][0m     Network Activity |       10.0.1.10 | Outbound beacon connection every 60 seconds to kno
+             ATT&CK: T1071 ΓÇö Application Layer Protocol
+    [93m[    HIGH][0m            Execution |       10.0.1.25 | detected
+             ATT&CK: T1059 ΓÇö Command and Scripting Interpreter
+    [93m[    HIGH][0m             DataLoss |       10.0.1.10 | exfiltration attempt
+             ATT&CK: T1041 ΓÇö Exfiltration Over C2 Channel
+    [93m[    HIGH][0m         Exfiltration |       10.0.1.10 | High volume DNS queries to asdfjkl3490sdkfjh2340sd
+             ATT&CK: T1041 ΓÇö Exfiltration Over C2 Channel
+======================================================================
+
+
+  [Phase 4] INVESTIGATION ΓÇö Analyzing high-severity alerts...
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    Alert ff601ed7... | Risk: 10.0/10 | IOCs: 2 | Related: 9
+      ** LATERAL MOVEMENT DETECTED **
+      -> IMMEDIATE: Isolate affected hosts and initiate incident response
+      -> Investigate all pivot point hosts for compromise indicators
+    Alert d8202919... | Risk: 6.2/10 | IOCs: 1 | Related: 2
+      -> URGENT: Escalate to senior analyst for manual review
+    Alert 3a5f72c7... | Risk: 8.9/10 | IOCs: 2 | Related: 10
+      ** LATERAL MOVEMENT DETECTED **
+      -> IMMEDIATE: Isolate affected hosts and initiate incident response
+      -> Investigate all pivot point hosts for compromise indicators
+
+  [Phase 5] CORRELATION ΓÇö Grouping into incidents...
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Incidents created: 31
+    INC-93E043EF: [CRITICAL] CRITICAL ΓÇö 14 correlated alerts involving src 10.0.1.10 [Initial Acces
+      Alerts: 14 | Kill chain: Actions on Objectives | Tactics: Initial Access, Execution, Privilege Escalation
+    INC-0C11BC53: [HIGH] HIGH ΓÇö 2 correlated alerts involving src 192.0.2.99 [Discovery]
+      Alerts: 2 | Kill chain: Lateral Movement | Tactics: Discovery
+    INC-984B3947: [MEDIUM] MEDIUM ΓÇö 1 correlated alerts involving unknown group-8
+      Alerts: 1 | Kill chain:  | Tactics: 
+    INC-5B192E18: [MEDIUM] MEDIUM ΓÇö 1 correlated alerts involving unknown group-9
+      Alerts: 1 | Kill chain:  | Tactics: 
+    INC-5519F02D: [MEDIUM] MEDIUM ΓÇö 1 correlated alerts involving unknown group-10
+      Alerts: 1 | Kill chain:  | Tactics: 
+
+  [Phase 6] THREAT HUNTING ΓÇö Executing hypotheses...
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    Hunt 'brute_force_detection': 2 matches | Anomaly score: 2.0/10
+      Anomaly: Activity at unusual hour (5:00 UTC)
+    Hunt 'data_exfiltration': 3 matches | Anomaly score: 3.5/10
+      Anomaly: Activity at unusual hour (5:00 UTC)
+      Anomaly: Activity at unusual hour (5:00 UTC)
+    Hunt 'command_and_control_beaconing': 2 matches | Anomaly score: 2.0/10
+      Anomaly: Activity at unusual hour (5:00 UTC)
+    Hunt 'suspicious_dns': 1 matches | Anomaly score: 0.5/10
+    Hunt 'unusual_process_execution': 1 matches | Anomaly score: 1.5/10
+      Anomaly: Activity at unusual hour (5:00 UTC)
+
+======================================================================
+  DEMO COMPLETE ΓÇö SentinelForge Pipeline Summary
+======================================================================
+  Logs ingested:     46
+  Alerts created:    46
+  Auto-closed:       0
+  Detections:        20
+  Incidents:         31
+  Hunts with hits:   5
+
+  Launch the dashboard:
+    sentinelforge dashboard
+    Then open http://localhost:5000
+======================================================================
+

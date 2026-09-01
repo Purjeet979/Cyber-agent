@@ -1,333 +1,91 @@
-# SentinelForge
-
-**Autonomous SOC Analyst Platform**
-
-AI-driven alert triage, log correlation, threat hunting, and incident response playbook execution for Security Operations Centers.
-
-[![CI](https://github.com/cwccie/sentinelforge/actions/workflows/ci.yml/badge.svg)](https://github.com/cwccie/sentinelforge/actions/workflows/ci.yml)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+<div align="center">
+  <h1>🛡️ Kalki</h1>
+  <p><b>Autonomous SOC Analyst Platform</b></p>
+  <p><i>Next-Generation Agentic AI for Cybersecurity Threat Detection & Response</i></p>
+</div>
 
 ---
 
-## The Problem
+## 🎯 The Problem
+Modern Security Operations Centers (SOCs) are overwhelmed with alert fatigue. Thousands of raw, uncontextualized logs are generated every minute by Firewalls, Proxies, and EDRs. Human analysts spend countless hours manually parsing logs, correlating IP addresses, and investigating false positives, which delays the response to real critical threats.
 
-There are **4.8 million unfilled cybersecurity positions** worldwide (ISC² 2024), and the gap is widening. SOC analysts face:
-
-- **11,000+ alerts/day** in enterprise environments, most of which are false positives
-- **Alert fatigue** causing analysts to miss genuine threats buried in noise
-- **45-minute average** time to triage a single alert manually
-- **Tier-1 analysts** spending 60-70% of their time on repetitive, automatable tasks
-
-Meanwhile, adversaries are faster than ever. The median breakout time (initial access to lateral movement) is now **62 minutes** (CrowdStrike 2024).
-
-**SentinelForge automates the 60-70% of Tier-1 SOC work** that is pattern-based and repetitive, letting human analysts focus on complex investigations that require judgment.
+## 💡 Our Solution: Kalki
+**Kalki** is an intelligent, autonomous SOC Analyst platform. Instead of just displaying logs, Kalki uses **Agentic AI (Groq Llama-3)** to act as a virtual Level-1/Level-2 SOC Analyst. It ingests raw logs, translates them into human-readable insights, correlates scattered alerts into full attack storylines (Incidents), and maps them to the MITRE ATT&CK framework—in real-time.
 
 ---
 
-## Architecture
+## 🤖 The AI Agents (How It Works)
+Kalki relies on a multi-agent architecture where different AI models handle specific stages of the cybersecurity pipeline:
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│                        ALERT SOURCES                            │
-│   Syslog (RFC 5424/3164) │ CEF │ LEEF │ JSON │ Windows XML     │
-└────────────────┬─────────────────────────────────────────────────┘
-                 │
-                 ▼
-┌──────────────────────────────────────────────────────────────────┐
-│                    INGESTION PIPELINE                            │
-│   Parse (auto-detect) → Normalize (OCSF) → Enrich              │
-│   • GeoIP lookup         • Threat intel     • Asset context     │
-└────────────────┬─────────────────────────────────────────────────┘
-                 │
-                 ▼
-┌──────────────────────────────────────────────────────────────────┐
-│                      TRIAGE AGENT                                │
-│   LLM-based severity classification + MITRE ATT&CK mapping      │
-│   • Confidence scoring   • Auto-close benign  • Verdict         │
-└────────┬───────────┬───────────┬─────────────────────────────────┘
-         │           │           │
-    ┌────▼──┐   ┌────▼────┐  ┌──▼──────────────────────────┐
-    │ LOW   │   │ MEDIUM  │  │ HIGH / CRITICAL              │
-    │Auto-  │   │Investi- │  │Alert → HITL → Playbook       │
-    │close  │   │gate →   │  │→ Remediate                   │
-    └───────┘   │Correlate│  └──────────────────────────────┘
-                │→ Report │
-                └─────────┘
-                     │
-                     ▼
-┌──────────────────────────────────────────────────────────────────┐
-│                  INCIDENT DASHBOARD                              │
-│   Real-time alert feed │ Timeline │ Playbook status │ Metrics   │
-│   WebSocket live updates │ REST API │ Investigation workspace   │
-└──────────────────────────────────────────────────────────────────┘
-```
+1. **The Triage Agent (`src/kalki/triage/`)** 
+   - **Role:** The Frontline Defender.
+   - **Action:** Ingests unstructured raw logs (Syslog, JSON, Windows Events). It uses the LLM to instantly evaluate the log, assign a Severity (Critical, High, Medium, Low), generate a clear `AI Reasoning`, and give a `Verdict` (Suspicious/Benign). Benign alerts are auto-closed to reduce noise.
+   
+2. **The Investigation Agent (`src/kalki/investigate/`)**
+   - **Role:** The Detective.
+   - **Action:** Continuously monitors the alert pool. When it sees multiple alerts from the same IP or targeting the same host within a timeframe, it groups them into a single **Incident**. It analyzes the sequence of events to construct a full **Kill Chain** and maps the behaviors to specific MITRE ATT&CK tactics (e.g., *Reconnaissance*, *Lateral Movement*).
+
+3. **The Hunter/Response Agent (`src/kalki/hunt/` & `playbook/`)**
+   - **Role:** The Responder.
+   - **Action:** Generates a comprehensive Incident Report and dynamic Response Playbooks. It recommends exact remediation steps to the security admin (e.g., "Isolate host 192.168.1.55", "Block IP on perimeter firewall").
 
 ---
 
-## Features
-
-### Multi-Format Log Ingestion
-- **5 formats**: Syslog RFC 5424/3164, CEF, LEEF, JSON, Windows Event XML
-- **Auto-detection**: Automatically identifies log format
-- **OCSF normalization**: All logs converted to Open Cybersecurity Schema Framework
-- **Enrichment**: GeoIP, threat intelligence, asset context
-
-### AI-Powered Triage Agent
-- **Severity classification**: Critical / High / Medium / Low / Info
-- **MITRE ATT&CK mapping**: Automatic technique and tactic identification
-- **Confidence scoring**: 0.0-1.0 confidence on every classification
-- **Auto-close**: Known benign patterns closed automatically (60-70% reduction)
-- **14 ATT&CK technique patterns** matched across all tactics
-
-### Investigation Agent
-- **IOC extraction**: IPs, domains, hashes (MD5/SHA1/SHA256), URLs, emails
-- **Timeline reconstruction**: Chronological event sequence
-- **Lateral movement detection**: Multi-host pivot analysis
-- **Risk scoring**: 0-10 composite risk score
-- **Actionable recommendations**: Specific remediation guidance
-
-### Correlation Engine
-- **Entity-based grouping**: Union-Find algorithm across IPs, users, hosts
-- **Kill chain progression**: ATT&CK tactic sequence detection
-- **Alert deduplication**: Identical alerts consolidated
-- **Incident creation**: Automatic incident packaging with full context
-
-### Playbook Engine
-- **YAML-defined playbooks**: Declarative response procedures
-- **HITL approval gates**: Destructive actions require human approval
-- **10 action types**: Block IP, isolate host, disable account, collect forensics, etc.
-- **Execution logging**: Full audit trail of every action
-- **5 built-in playbooks**: Brute force, malware, data exfil, phishing, privilege escalation
-
-### Threat Hunting
-- **8 built-in hypotheses**: Brute force, lateral movement, exfiltration, C2 beaconing, etc.
-- **Anomaly scoring**: Statistical baseline comparison
-- **Custom hypotheses**: Define your own hunt queries
-- **Frequency, timing, and fan-out anomaly detection**
-
-### Detection Models
-- **10 built-in detection rules**: Brute force, PowerShell, credential dumping, ransomware, etc.
-- **Rule engine**: Pattern-based with threshold support
-- **ML anomaly detector**: Z-score analysis with NumPy (optional)
-- **Custom rules**: Add your own detection logic
-
-### Web Dashboard
-- **Real-time alert feed**: Live severity-coded display
-- **Incident timeline**: Visual attack progression
-- **WebSocket support**: Push updates to connected clients
-- **REST API**: Full CRUD for alerts, incidents, and playbooks
-- **Dark SOC theme**: Purpose-built for 24/7 operations
+## 📡 Live Endpoint Monitoring (Real Setup)
+We didn't just build a log analyzer; we built a real-time sensor. 
+Included in this project is `endpoint_agent.py` — a lightweight **Windows Endpoint Agent**.
+- **How it works:** It continuously monitors the Windows OS DNS cache (`ipconfig /displaydns`).
+- **Detection:** The moment a user clicks a phishing link or hidden malware tries to contact a C2 server (e.g., Cloudflare Tunnels), the agent intercepts the DNS resolution and forwards the raw log to Kalki.
+- **Result:** The Kalki Dashboard instantly flags the malicious DNS activity in real-time, proving end-to-end real-world detection capability.
 
 ---
 
-## Quickstart
+## ✨ Key Features
+- **Zero-Rule Engine:** No hardcoded regex rules for threat detection. The AI dynamically understands the context of the attack.
+- **Smart Correlation:** Groups 100+ noisy alerts into 1 structured Incident.
+- **OCSF Standardized:** Converts all ingested logs into the industry-standard Open Cybersecurity Schema Framework.
+- **Glassmorphic 3D UI:** A stunning, futuristic, real-time dashboard built with vanilla CSS and JS.
+- **Simulated & Live Modes:** Capable of running simulated Kill Chain demos and processing real live hardware traffic simultaneously.
 
-### Install
+---
 
-```bash
-# Clone
-git clone https://github.com/cwccie/sentinelforge.git
-cd sentinelforge
+## 🚀 Quick Start Guide
 
-# Install with all optional dependencies
-pip install -e ".[all]"
-
-# Or minimal install (no web dashboard, no CLI colors)
+### 1. Installation
+Clone the repository and set up a virtual environment:
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 pip install -e .
 ```
 
-### Demo Mode
-
-Run the full pipeline with sample data:
-
-```bash
-sentinelforge demo
+### 2. Environment Variables
+Kalki uses Groq's lightning-fast inference for real-time AI processing.
+```powershell
+$env:GROQ_API_KEY="your_api_key_here"
+$env:PYTHONIOENCODING="utf-8"
 ```
 
-This will:
-1. Ingest 20+ sample logs across all formats
-2. Triage and classify each alert with ATT&CK mapping
-3. Run detection rules
-4. Investigate high-severity alerts
-5. Correlate alerts into incidents
-6. Execute threat hunts
-7. Print a comprehensive summary
-
-### Launch Dashboard
-
-```bash
-sentinelforge dashboard
-# Open http://localhost:5000
+### 3. Launching the System
+Start the main Dashboard server:
+```powershell
+kalki dashboard
 ```
+Open your browser to `http://127.0.0.1:5000/`.
 
-### Docker
-
-```bash
-docker compose up -d
-# Dashboard at http://localhost:5000
-
-# With demo data:
-docker compose --profile demo up -d
-```
-
-### Submit an Alert via API
-
-```bash
-# Submit a raw log
-curl -X POST http://localhost:5000/api/v1/alerts \
-  -H "Content-Type: application/json" \
-  -d '{"raw_log": "<134>1 2026-02-23T10:15:30Z fw01 sshd 1234 - - Failed password for admin from 198.51.100.23 port 22"}'
-
-# List alerts
-curl http://localhost:5000/api/v1/alerts
-
-# Run correlation
-curl -X POST http://localhost:5000/api/v1/correlate
-
-# Get metrics
-curl http://localhost:5000/api/v1/metrics
-```
+### 4. Testing the System
+- **Simulation:** Click **"▶ Run Attack Simulation"** in the dashboard header to inject a multi-stage APT attack into the system.
+- **Live Endpoint Test:** Start the live agent from the dashboard UI **"🔌 Live Agent: ON"**, then visit any phishing link (e.g., a Cloudflare tunnel) to see real-time detection.
 
 ---
 
-## CLI Reference
-
-```
-sentinelforge ingest <file>              Ingest logs from a file
-sentinelforge triage                     Run triage on pending alerts
-sentinelforge investigate <alert_id>     Deep investigation of an alert
-sentinelforge correlate                  Group alerts into incidents
-sentinelforge hunt [hypothesis]          Run threat hunting hypotheses
-sentinelforge dashboard                  Launch web dashboard
-sentinelforge demo                       Full pipeline demo with sample data
-sentinelforge status                     Show system status
-```
+## 🔮 Future Roadmap (Scaling Kalki)
+- **Active Response (SOAR):** Integrating Python APIs to automatically apply Firewall rules or disable Active Directory accounts without human intervention.
+- **Multi-OS Support:** Expanding the Endpoint Agent to support eBPF on Linux for kernel-level network tracing.
+- **Local LLM Integration:** Supporting local models via Ollama to ensure complete data privacy for highly secure air-gapped environments.
+- **Graph Database Correlation:** Moving from relational tables to Neo4j to visualize complex lateral movement paths across enterprise networks.
 
 ---
-
-## API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/v1/alerts` | Submit a raw log for ingestion + triage |
-| `GET` | `/api/v1/alerts` | List alerts (filter by status, severity) |
-| `GET` | `/api/v1/alerts/<id>` | Get specific alert |
-| `POST` | `/api/v1/alerts/<id>/investigate` | Run investigation |
-| `GET` | `/api/v1/incidents` | List incidents |
-| `GET` | `/api/v1/incidents/<id>` | Get specific incident |
-| `POST` | `/api/v1/correlate` | Trigger correlation engine |
-| `POST` | `/api/v1/ingest/batch` | Batch log ingestion |
-| `GET` | `/api/v1/metrics` | System metrics |
-
----
-
-## MITRE ATT&CK Coverage
-
-SentinelForge maps alerts to MITRE ATT&CK techniques across the kill chain:
-
-| Tactic | Techniques | IDs |
-|--------|-----------|-----|
-| Initial Access | Valid Accounts, Phishing | T1078, T1566 |
-| Execution | Command and Scripting Interpreter | T1059 |
-| Persistence | Scheduled Task/Job | T1053 |
-| Privilege Escalation | Exploitation for Privilege Escalation | T1068 |
-| Defense Evasion | Indicator Removal | T1070 |
-| Credential Access | Brute Force, OS Credential Dumping | T1110, T1003 |
-| Discovery | Network Service Discovery | T1046 |
-| Lateral Movement | Remote Services | T1021 |
-| Command and Control | Application Layer Protocol, DNS | T1071, T1071.004 |
-| Exfiltration | Exfiltration Over C2 Channel | T1041 |
-| Impact | Data Encrypted for Impact | T1486 |
-
----
-
-## Comparison
-
-| Feature | SentinelForge | Splunk SOAR | Palo Alto XSOAR |
-|---------|:------------:|:-----------:|:---------------:|
-| Open source | **Yes (MIT)** | No | No |
-| Self-hosted | **Yes** | Yes | Yes/Cloud |
-| AI triage | **Built-in** | Plugin | Plugin |
-| ATT&CK mapping | **Automatic** | Manual | Semi-auto |
-| Zero dependencies | **Yes** | No | No |
-| Multi-format ingest | **5 formats** | Via add-ons | Via integrations |
-| Playbook engine | **YAML + HITL** | Visual | Visual |
-| Threat hunting | **Built-in** | Separate | Separate |
-| Setup time | **< 5 minutes** | Days-weeks | Days-weeks |
-| License cost | **$0** | $$$$ | $$$$ |
-
----
-
-## Project Structure
-
-```
-sentinelforge/
-├── src/sentinelforge/
-│   ├── ingest/          # Multi-format log parsers + OCSF normalization
-│   ├── triage/          # AI triage agent with ATT&CK mapping
-│   ├── investigate/     # IOC extraction, timeline, lateral movement
-│   ├── correlate/       # Entity-based correlation engine
-│   ├── playbook/        # YAML playbook engine with HITL gates
-│   ├── hunt/            # Threat hunting with anomaly scoring
-│   ├── dashboard/       # Flask + WebSocket web interface
-│   ├── api/             # REST API endpoints
-│   ├── models/          # Rule engine + ML anomaly detector
-│   ├── schemas.py       # OCSF-aligned data models
-│   ├── store.py         # Thread-safe in-memory storage
-│   └── cli.py           # Click CLI
-├── tests/               # 50+ tests across all modules
-├── sample_data/         # Sample logs in all supported formats
-├── playbooks/           # 5 YAML response playbooks
-├── pyproject.toml       # Package configuration
-├── Dockerfile           # Container build
-├── docker-compose.yml   # Container orchestration
-└── README.md
-```
-
----
-
-## Development
-
-```bash
-# Setup
-python -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev]"
-
-# Test
-pytest --cov
-
-# Lint
-ruff check src/ tests/
-
-# Run demo
-sentinelforge demo
-```
-
----
-
-## Roadmap
-
-- [ ] Real LLM integration (OpenAI, Anthropic, local models)
-- [ ] Elasticsearch backend for persistent storage
-- [ ] STIX/TAXII threat intelligence feed integration
-- [ ] SOAR integrations (TheHive, Cortex, Shuffle)
-- [ ] Sigma rule import
-- [ ] Multi-tenant support
-- [ ] Kafka/Redis streaming ingestion
-- [ ] RBAC and audit logging
-
----
-
-## Author
-
-**Corey A. Wade**
-- CISSP, CCIE #14124
-- PhD Candidate — AI + Cybersecurity
-- GitHub: [@cwccie](https://github.com/cwccie)
-
----
-
-## License
-
-MIT License — see [LICENSE](LICENSE) for details.
+<div align="center">
+  <p>Built with ❤️ for Smart India Hackathon</p>
+</div>

@@ -1,6 +1,6 @@
-# Contributing to SentinelForge
+# Contributing to Kalki
 
-Thank you for your interest in contributing to SentinelForge! This document provides
+Thank you for your interest in contributing to Kalki! This document provides
 guidelines for contributing to the project.
 
 ## Getting Started
@@ -15,8 +15,8 @@ guidelines for contributing to the project.
 
 ```bash
 # Clone your fork
-git clone https://github.com/YOUR-USERNAME/sentinelforge.git
-cd sentinelforge
+git clone https://github.com/YOUR-USERNAME/kalki.git
+cd kalki
 
 # Set up development environment
 python -m venv .venv
@@ -25,7 +25,7 @@ pip install -e ".[dev]"
 
 # Verify everything works
 pytest
-sentinelforge demo
+kalki demo
 ```
 
 ## Code Style
@@ -40,7 +40,7 @@ sentinelforge demo
 - Write tests for all new features
 - Maintain test coverage above 80%
 - Run the full test suite before submitting: `pytest --cov`
-- Tests are in the `tests/` directory, mirroring `src/sentinelforge/` structure
+- Tests are in the `tests/` directory, mirroring `src/kalki/` structure
 
 ## Pull Request Process
 
@@ -54,7 +54,7 @@ sentinelforge demo
 
 To add a new detection rule:
 
-1. Add the rule to `BUILTIN_RULES` in `src/sentinelforge/models/detector.py`
+1. Add the rule to `BUILTIN_RULES` in `src/kalki/models/detector.py`
 2. Include a MITRE ATT&CK technique ID
 3. Add a test case in `tests/test_models.py`
 4. Update sample data if helpful for demonstration
@@ -72,7 +72,7 @@ To add a new response playbook:
 
 To add support for a new log format:
 
-1. Add a parser function in `src/sentinelforge/ingest/parsers.py`
+1. Add a parser function in `src/kalki/ingest/parsers.py`
 2. Update `detect_format()` to recognize the new format
 3. Add sample data in `sample_data/`
 4. Add tests in `tests/test_parsers.py`

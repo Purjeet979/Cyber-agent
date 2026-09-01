@@ -1,4 +1,4 @@
-# SentinelForge sample CEF (Common Event Format) data
+# Kalki sample CEF (Common Event Format) data
 CEF:0|SecurityCo|Firewall|1.0|100|Connection to Known C2 Server|9|src=10.0.1.10 dst=203.0.113.66 dpt=443 spt=54321 proto=TCP act=blocked cat=C2 msg=Outbound connection to known command and control server
 CEF:0|SecurityCo|IDS|2.0|200|Suspicious PowerShell Execution|8|src=10.0.1.25 spt=0 msg=powershell.exe -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQA act=detected suser=admin1 cat=Execution
 CEF:0|SecurityCo|DLP|1.0|300|Large Data Transfer Detected|7|src=10.0.1.10 dst=198.51.100.23 dpt=443 msg=upload 500MB archive to external IP via HTTPS act=exfiltration attempt cat=DataLoss suser=jdoe

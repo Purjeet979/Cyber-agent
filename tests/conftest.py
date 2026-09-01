@@ -1,8 +1,8 @@
-"""Shared test fixtures for SentinelForge."""
+"""Shared test fixtures for Kalki."""
 
 import pytest
-from sentinelforge.schemas import OCSFAlert, Severity, AlertStatus, Verdict
-from sentinelforge.store import AlertStore, IncidentStore, alert_store, incident_store
+from kalki.schemas import OCSFAlert, Severity, AlertStatus, Verdict
+from kalki.store import AlertStore, IncidentStore, alert_store, incident_store
 
 
 @pytest.fixture(autouse=True)

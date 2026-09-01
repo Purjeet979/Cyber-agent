@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kalki — Autonomous SOC Dashboard</title>
+<link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+<!-- Modern 3D Landing Page Overlay -->
+<div id="landing-overlay" class="landing-overlay">
+  <div class="landing-card-container">
+    <div class="landing-card">
+      <h1 class="landing-title">&#x1f6e1; Kalki</h1>
+      <p class="landing-subtitle">Autonomous SOC Analyst Platform</p>
+      
+      <div class="marquee-container">
+        <div class="marquee-content">
+           <span class="marquee-item">🛡️ Threat Detection</span>
+           <span class="marquee-item">🤖 Agentic AI Triage</span>
+           <span class="marquee-item">🚨 Automated Response</span>
+           <span class="marquee-item">⚡ Real-time Analytics</span>
+           <span class="marquee-item">🛡️ Threat Detection</span>
+           <span class="marquee-item">🤖 Agentic AI Triage</span>
+           <span class="marquee-item">🚨 Automated Response</span>
+           <span class="marquee-item">⚡ Real-time Analytics</span>
+        </div>
+      </div>
+
+      <button id="enter-btn" class="modern-btn" onclick="document.getElementById('landing-overlay').style.opacity='0'; setTimeout(() => document.getElementById('landing-overlay').style.display='none', 500);">Launch Dashboard</button>
+    </div>
+  </div>
+</div>
+
+<header class="header">
+  <div class="header-left">
+    <h1 class="logo" style="cursor:pointer; transition: opacity 0.2s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1" onclick="document.getElementById('landing-overlay').style.display='flex'; setTimeout(() => document.getElementById('landing-overlay').style.opacity='1', 10);">&#x1f6e1; Kalki</h1>
+    <span class="badge live">LIVE</span>
+  </div>
+  <div class="header-right">
+    <button id="agent-btn" onclick="toggleAgent()" style="background: var(--bg-card); border: 1px solid var(--border-color); color: white; padding: 5px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-right: 15px; transition: all 0.3s;">🔌 Live Agent: OFF</button>
+    <button id="sim-btn" onclick="runSimulation()" style="background: var(--critical); color: white; border: none; padding: 5px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-right: 15px; transition: all 0.3s;">▶ Run Attack Simulation</button>
+    <span class="status-text" id="connection-status">Connecting...</span>
+    <span class="timestamp" id="last-update"></span>
+  </div>
+</header>
+
+<main class="main">
+  <!-- Metrics Row -->
+  <section class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-label">Total Alerts</div>
+      <div class="metric-value" id="total-alerts">0</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Incidents</div>
+      <div class="metric-value" id="total-incidents">0</div>
+    </div>
+    <div class="metric-card critical">
+      <div class="metric-label">Critical</div>
+      <div class="metric-value" id="critical-count">0</div>
+    </div>
+    <div class="metric-card high">
+      <div class="metric-label">High</div>
+      <div class="metric-value" id="high-count">0</div>
+    </div>
+    <div class="metric-card medium">
+      <div class="metric-label">Medium</div>
+      <div class="metric-value" id="medium-count">0</div>
+    </div>
+    <div class="metric-card low">
+      <div class="metric-label">Auto-Closed</div>
+      <div class="metric-value" id="auto-closed-count">0</div>
+    </div>
+  </section>
+
+  <!-- Tabs -->
+  <nav class="tabs">
+    <button class="tab active" data-tab="alerts">Alert Feed</button>
+    <button class="tab" data-tab="incidents">Incidents</button>
+    <button class="tab" data-tab="timeline">Timeline</button>
+  </nav>
+
+  <!-- Alert Feed -->
+  <section class="tab-content active" id="tab-alerts">
+    <div class="table-controls">
+      <select id="severity-filter">
+        <option value="">All Severities</option>
+        <option value="CRITICAL">Critical</option>
+        <option value="HIGH">High</option>
+        <option value="MEDIUM">Medium</option>
+        <option value="LOW">Low</option>
+        <option value="INFO">Info</option>
+      </select>
+    </div>
+    <table class="alert-table">
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Severity</th>
+          <th>Category</th>
+          <th>Source IP</th>
+          <th>ATT&CK</th>
+          <th>Activity</th>
+          <th>AI Reasoning</th>
+          <th>Verdict</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="alert-table-body">
+        <tr><td colspan="8" class="empty-state">Loading alerts...</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Incidents -->
+  <section class="tab-content" id="tab-incidents">
+    <table class="alert-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Severity</th>
+          <th>Title</th>
+          <th>Alerts</th>
+          <th>Kill Chain</th>
+          <th>Tactics</th>
+          <th>Status</th>
+          <th>Report</th>
+        </tr>
+      </thead>
+      <tbody id="incident-table-body">
+        <tr><td colspan="7" class="empty-state">No incidents yet.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Timeline -->
+  <section class="tab-content" id="tab-timeline">
+    <div class="timeline" id="timeline-container">
+      <p class="empty-state">Select an incident to view its timeline.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>Kalki v0.1.0 — Autonomous SOC Analyst Platform</span>
+  <span>Created by Corey A. Wade (CISSP, CCIE #14124)</span>
+</footer>
+
+<script src="/static/js/dashboard.js"></script>
+<script>
+function runSimulation() {
+  const btn = document.getElementById('sim-btn');
+  btn.innerHTML = "⏳ Attack Simulating...";
+  btn.style.opacity = "0.7";
+  btn.style.background = "#eab308"; /* yellow/warning color */
+  btn.disabled = true;
+  
+  fetch('/api/v1/simulate', {method: 'POST'})
+    .then(response => {
+      // Keep it showing "Simulating" for 15 seconds to match backend processing time
+      setTimeout(() => {
+        btn.innerHTML = "✅ Simulation Complete";
+        btn.style.background = "#22c55e"; /* green/success color */
+        
+        setTimeout(() => {
+          btn.innerHTML = "▶ Run Attack Simulation";
+          btn.style.background = "var(--critical)";
+          btn.style.opacity = "1";
+          btn.disabled = false;
+        }, 5000);
+      }, 15000);
+    })
+    .catch(err => {
+      btn.innerHTML = "❌ Failed";
+      btn.style.background = "var(--critical)";
+      btn.disabled = false;
+    });
+}
+
+let agentRunning = false;
+function toggleAgent() {
+  const btn = document.getElementById('agent-btn');
+  const action = agentRunning ? 'stop' : 'start';
+  btn.innerHTML = "⏳ Processing...";
+  
+  fetch('/api/v1/agent/toggle', {
+    method: 'POST',
+    body: JSON.stringify({action: action})
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.status === 'running') {
+      agentRunning = true;
+      btn.innerHTML = "🟢 Live Agent: ON";
+      btn.style.borderColor = "#22c55e";
+    } else {
+      agentRunning = false;
+      btn.innerHTML = "🔌 Live Agent: OFF";
+      btn.style.borderColor = "var(--border-color)";
+    }
+  })
+  .catch(err => {
+      btn.innerHTML = "❌ Error";
+      setTimeout(() => {
+        btn.innerHTML = agentRunning ? "🟢 Live Agent: ON" : "🔌 Live Agent: OFF";
+      }, 2000);
+  });
+}
+</script>
+</body>
+</html>

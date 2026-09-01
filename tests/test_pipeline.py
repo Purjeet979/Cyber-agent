@@ -1,9 +1,9 @@
 """Tests for the full ingestion pipeline."""
 
 import pytest
-from sentinelforge.ingest.pipeline import ingest_log, ingest_batch
-from sentinelforge.schemas import Severity
-from sentinelforge.store import alert_store
+from kalki.ingest.pipeline import ingest_log, ingest_batch
+from kalki.schemas import Severity
+from kalki.store import alert_store
 
 
 class TestIngestionPipeline:

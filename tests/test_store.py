@@ -1,8 +1,8 @@
 """Tests for the data store."""
 
 import pytest
-from sentinelforge.store import AlertStore, IncidentStore
-from sentinelforge.schemas import OCSFAlert, Incident, Severity, AlertStatus
+from kalki.store import AlertStore, IncidentStore
+from kalki.schemas import OCSFAlert, Incident, Severity, AlertStatus
 
 
 class TestAlertStore:

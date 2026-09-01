@@ -1,9 +1,9 @@
 """Tests for the correlation engine."""
 
 import pytest
-from sentinelforge.correlate.engine import CorrelationEngine, correlate_alerts
-from sentinelforge.schemas import OCSFAlert, Severity, AlertStatus
-from sentinelforge.store import alert_store, incident_store
+from kalki.correlate.engine import CorrelationEngine, correlate_alerts
+from kalki.schemas import OCSFAlert, Severity, AlertStatus
+from kalki.store import alert_store, incident_store
 
 
 class TestCorrelationEngine:

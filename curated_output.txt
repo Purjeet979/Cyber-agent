@@ -1,0 +1,110 @@
+﻿
+    ΓòöΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòù
+    Γòæ           SentinelForge v0.1.0                  Γòæ
+    Γòæ       Autonomous SOC Analyst Platform            Γòæ
+    Γòæ                                                  Γòæ
+    Γòæ   Created by Corey A. Wade (CISSP, CCIE #14124)  Γòæ
+    ΓòÜΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓò¥
+    
+
+  [Phase 1] INGESTION ΓÇö Processing 15 logs...
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+  Ingested: 5/15
+  Ingested: 10/15
+  Ingested: 15/15
+
+  [Phase 2] TRIAGE ΓÇö Classifying 15 alerts...
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Triaged: 15 | Auto-closed (benign): 0
+
+  [Phase 3] DETECTION ΓÇö Running rule engine...
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Detection rules fired: 20
+    [SF-001] Multiple Failed Logins: More than 5 failed login attempts from same source within an
+    [SF-004] Outbound Connection to Known C2: Connection to IP/domain flagged in threat intelligence
+    [SF-003] Credential Dumping Tool: Known credential dumping tool detected (mimikatz, procdump, 
+    [SF-008] Suspicious DNS Query: DNS query to high-entropy or known-bad domain
+    [SF-004] Outbound Connection to Known C2: Connection to IP/domain flagged in threat intelligence
+
+======================================================================
+  Triage Results
+======================================================================
+
+  Total alerts: 15
+  Severity distribution:
+    [93m      HIGH[0m:   9 #########
+    [91m  CRITICAL[0m:   6 ######
+
+  Status distribution:
+            triaged: 15
+
+  Top alerts:
+    [91m[CRITICAL][0m              Malware |       10.0.1.10 | Credential dumping tool mimikatz.exe detected acce
+             ATT&CK: T1003 ΓÇö OS Credential Dumping
+    [91m[CRITICAL][0m     Lateral Movement |       10.0.1.10 | psexec connection from compromised workstation to 
+             ATT&CK: T1021 ΓÇö Remote Services
+    [91m[CRITICAL][0m              Malware |       10.0.1.10 | CVE-2024-1234 exploit attempt: local privilege esc
+             ATT&CK: T1068 ΓÇö Exploitation for Privilege Escalation
+    [91m[CRITICAL][0m     Network Activity |       10.0.1.10 | Outbound beacon connection every 60 seconds to kno
+             ATT&CK: T1071 ΓÇö Application Layer Protocol
+    [91m[CRITICAL][0m                   C2 |       10.0.1.10 | blocked
+             ATT&CK: T1071 ΓÇö Application Layer Protocol
+    [91m[CRITICAL][0m              Malware |       10.0.1.10 | ransomware activity
+             ATT&CK: T1486 ΓÇö Data Encrypted for Impact
+    [93m[    HIGH][0m       Authentication |   198.51.100.23 | Failed login attempt from external IP to domain co
+    [93m[    HIGH][0m         DNS Activity |       10.0.1.10 | DNS query for suspicious DGA domain: xk4j9f3ls92kd
+             ATT&CK: T1071.004 ΓÇö DNS
+    [93m[    HIGH][0m    Data Exfiltration |       10.0.1.10 | Large file upload 2.3GB to external IP via encrypt
+             ATT&CK: T1041 ΓÇö Exfiltration Over C2 Channel
+    [93m[    HIGH][0m                Email |    203.0.113.66 | Suspicious phishing email with malicious attachmen
+             ATT&CK: T1566 ΓÇö Phishing
+======================================================================
+
+
+  [Phase 4] INVESTIGATION ΓÇö Analyzing high-severity alerts...
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    Alert e8f7bdd9... | Risk: 7.4/10 | IOCs: 2 | Related: 4
+      -> URGENT: Escalate to senior analyst for manual review
+      -> Block identified malicious IPs at perimeter firewall
+    Alert 4efbde87... | Risk: 9.7/10 | IOCs: 1 | Related: 8
+      ** LATERAL MOVEMENT DETECTED **
+      -> IMMEDIATE: Isolate affected hosts and initiate incident response
+      -> Investigate all pivot point hosts for compromise indicators
+    Alert cb807fe6... | Risk: 8.1/10 | IOCs: 3 | Related: 8
+      ** LATERAL MOVEMENT DETECTED **
+      -> IMMEDIATE: Isolate affected hosts and initiate incident response
+      -> Investigate all pivot point hosts for compromise indicators
+
+  [Phase 5] CORRELATION ΓÇö Grouping into incidents...
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Incidents created: 1
+    INC-7D38C4DE: [CRITICAL] CRITICAL ΓÇö 13 correlated alerts involving src 10.0.1.10 [Initial Acces
+      Alerts: 13 | Kill chain: Actions on Objectives | Tactics: Initial Access, Execution, Privilege Escalation
+
+  [Phase 6] THREAT HUNTING ΓÇö Executing hypotheses...
+  ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    Hunt 'brute_force_detection': 4 matches | Anomaly score: 2.0/10
+    Hunt 'data_exfiltration': 2 matches | Anomaly score: 2.0/10
+      Anomaly: Activity at unusual hour (5:00 UTC)
+    Hunt 'command_and_control_beaconing': 2 matches | Anomaly score: 2.0/10
+      Anomaly: Activity at unusual hour (5:00 UTC)
+    Hunt 'suspicious_dns': 1 matches | Anomaly score: 0.5/10
+    Hunt 'unusual_process_execution': 1 matches | Anomaly score: 1.5/10
+      Anomaly: Activity at unusual hour (5:00 UTC)
+
+======================================================================
+  DEMO COMPLETE ΓÇö SentinelForge Pipeline Summary
+======================================================================
+  Logs ingested:     15
+  Alerts created:    15
+  Auto-closed:       0
+  Detections:        20
+  Incidents:         1
+  Hunts with hits:   5
+
+  Launch the dashboard:
+    sentinelforge dashboard
+    Then open http://localhost:5000
+======================================================================
+

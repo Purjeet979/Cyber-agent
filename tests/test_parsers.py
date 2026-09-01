@@ -2,7 +2,7 @@
 
 import json
 import pytest
-from sentinelforge.ingest.parsers import (
+from kalki.ingest.parsers import (
     detect_format, parse_log, parse_cef, parse_leef,
     parse_syslog, parse_json_alert, parse_windows_xml,
 )
