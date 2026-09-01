@@ -9,27 +9,61 @@
 <body>
 <!-- Modern 3D Landing Page Overlay -->
 <div id="landing-overlay" class="landing-overlay">
-  <div class="landing-card-container">
-    <div class="landing-card">
-      <h1 class="landing-title">&#x1f6e1; Kalki</h1>
-      <p class="landing-subtitle">Autonomous SOC Analyst Platform</p>
-      
-      <div class="marquee-container">
-        <div class="marquee-content">
-           <span class="marquee-item">🛡️ Threat Detection</span>
-           <span class="marquee-item">🤖 Agentic AI Triage</span>
-           <span class="marquee-item">🚨 Automated Response</span>
-           <span class="marquee-item">⚡ Real-time Analytics</span>
-           <span class="marquee-item">🛡️ Threat Detection</span>
-           <span class="marquee-item">🤖 Agentic AI Triage</span>
-           <span class="marquee-item">🚨 Automated Response</span>
-           <span class="marquee-item">⚡ Real-time Analytics</span>
-        </div>
-      </div>
+  <!-- Navigation Bar -->
+  <nav class="landing-nav">
+    <div class="landing-nav-logo">&#x1f6e1; Kalki</div>
+    <div class="landing-nav-links">
+      <a href="#hero">Home</a>
+      <a href="#about">About Project</a>
+      <a href="#" class="nav-launch-btn" onclick="document.getElementById('landing-overlay').style.opacity='0'; setTimeout(() => document.getElementById('landing-overlay').style.display='none', 500);">Launch Dashboard</a>
+    </div>
+  </nav>
 
-      <button id="enter-btn" class="modern-btn" onclick="document.getElementById('landing-overlay').style.opacity='0'; setTimeout(() => document.getElementById('landing-overlay').style.display='none', 500);">Launch Dashboard</button>
+  <!-- Hero Section -->
+  <div id="hero" class="landing-hero">
+    <div class="landing-card-container">
+      <div class="landing-card">
+        <h1 class="landing-title">&#x1f6e1; Kalki</h1>
+        <p class="landing-subtitle">Autonomous SOC Analyst Platform</p>
+        
+        <div class="marquee-container">
+          <div class="marquee-content">
+             <span class="marquee-item">🛡️ Threat Detection</span>
+             <span class="marquee-item">🤖 Agentic AI Triage</span>
+             <span class="marquee-item">🚨 Automated Response</span>
+             <span class="marquee-item">⚡ Real-time Analytics</span>
+             <span class="marquee-item">🛡️ Threat Detection</span>
+             <span class="marquee-item">🤖 Agentic AI Triage</span>
+             <span class="marquee-item">🚨 Automated Response</span>
+             <span class="marquee-item">⚡ Real-time Analytics</span>
+          </div>
+        </div>
+
+        <button id="enter-btn" class="modern-btn" onclick="document.getElementById('landing-overlay').style.opacity='0'; setTimeout(() => document.getElementById('landing-overlay').style.display='none', 500);">Launch Dashboard</button>
+      </div>
     </div>
   </div>
+
+  <!-- About Section -->
+  <section id="about" class="landing-about">
+    <h2>The Future of SOC Operations</h2>
+    <p class="about-desc">Kalki is an Autonomous SOC Analyst Platform designed for the Smart India Hackathon. It addresses the critical issue of alert fatigue in modern cybersecurity environments by replacing manual log analysis with advanced Agentic AI.</p>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>🤖 Agentic AI Triage</h3>
+        <p>Instead of hardcoded Regex rules, Kalki uses Cognitive AI (Groq Llama-3) to read raw network logs, determine the severity, and explain its reasoning in plain English.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🔗 Smart Correlation</h3>
+        <p>Individual alerts are grouped based on Temporal and IP heuristics into full attack storylines (Incidents) mapped directly to the MITRE ATT&CK framework.</p>
+      </div>
+      <div class="feature-card">
+        <h3>⚡ Real-Time Detection</h3>
+        <p>Equipped with a live Windows Endpoint Agent, Kalki intercepts malicious DNS queries and Drive-By downloads instantly, pushing alerts via WebSockets.</p>
+      </div>
+    </div>
+  </section>
 </div>
 
 <header class="header">

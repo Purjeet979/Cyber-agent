@@ -185,13 +185,114 @@ body {
 .landing-overlay {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+  background: linear-gradient(135deg, #000000 0%, #0a192f 50%, #172a45 100%);
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  transition: opacity 0.5s ease;
+  scroll-behavior: smooth;
+}
+
+/* Landing Nav */
+.landing-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 4rem;
+  width: 100%;
+}
+.landing-nav-logo {
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+.landing-nav-links {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+.landing-nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+.landing-nav-links a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+.nav-launch-btn {
+  background: rgba(59, 130, 246, 0.2);
+  border: 1px solid var(--accent);
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  color: #fff !important;
+}
+.nav-launch-btn:hover {
+  background: var(--accent);
+}
+
+/* Hero Section */
+.landing-hero {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  transition: opacity 0.5s ease;
+  min-height: 85vh;
+  width: 100%;
+}
+
+/* About Section */
+.landing-about {
+  padding: 4rem 2rem 8rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+.landing-about h2 {
+  font-size: 2.8rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+.landing-about p.about-desc {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-width: 800px;
+  margin: 0 auto 4rem auto;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+.feature-card {
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 2.5rem;
+  border-radius: 20px;
+  text-align: left;
+  transition: transform 0.3s;
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+.feature-card h3 {
+  color: #fff;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.feature-card p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
 }
 
 /* 3D Container */
