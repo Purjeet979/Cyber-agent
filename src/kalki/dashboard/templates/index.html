@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kalki — Autonomous SOC Dashboard</title>
 <link rel="stylesheet" href="/static/css/dashboard.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <!-- Modern 3D Landing Page Overlay -->
@@ -107,6 +108,22 @@
     <div class="metric-card low">
       <div class="metric-label">Auto-Closed</div>
       <div class="metric-value" id="auto-closed-count">0</div>
+    </div>
+  </section>
+
+  <!-- Charts Row -->
+  <section class="charts-section" style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+    <div class="metric-card" style="flex: 2; min-width: 400px; height: 250px; position: relative;">
+      <h3 style="text-align:left; font-size:1rem; color:var(--text-secondary); margin-bottom:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">Incident Timeline (Live)</h3>
+      <div style="height: 200px; width: 100%;">
+        <canvas id="timelineChart"></canvas>
+      </div>
+    </div>
+    <div class="metric-card" style="flex: 1; min-width: 250px; height: 250px; position: relative;">
+      <h3 style="text-align:left; font-size:1rem; color:var(--text-secondary); margin-bottom:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">Threat Distribution</h3>
+      <div style="height: 200px; width: 100%;">
+        <canvas id="severityChart"></canvas>
+      </div>
     </div>
   </section>
 

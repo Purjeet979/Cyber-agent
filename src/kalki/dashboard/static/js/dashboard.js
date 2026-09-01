@@ -22,6 +22,7 @@ async function loadData() {
     const response = await fetch('/dashboard/data');
     const data = await response.json();
     updateMetrics(data.metrics);
+    updateCharts(data.alerts);
     updateAlertTable(data.alerts);
     updateIncidentTable(data.incidents);
     document.getElementById('connection-status').textContent = 'Connected';
@@ -41,6 +42,84 @@ function updateMetrics(metrics) {
   document.getElementById('high-count').textContent = metrics.severity_distribution.HIGH || 0;
   document.getElementById('medium-count').textContent = metrics.severity_distribution.MEDIUM || 0;
   document.getElementById('auto-closed-count').textContent = metrics.status_distribution.auto_closed || 0;
+}
+
+let timelineChartInstance = null;
+let severityChartInstance = null;
+
+function updateCharts(alerts) {
+  if (!alerts || alerts.length === 0) return;
+
+  // Process data for Timeline Chart (group by minute)
+  const timeMap = {};
+  alerts.forEach(a => {
+    const timeStr = new Date(a.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    if (!timeMap[timeStr]) timeMap[timeStr] = {CRITICAL:0, HIGH:0, MEDIUM:0, LOW:0, INFO:0};
+    timeMap[timeStr][a.severity] = (timeMap[timeStr][a.severity] || 0) + 1;
+  });
+
+  // Sort timestamps chronologically
+  const labels = Object.keys(timeMap).sort((a,b) => {
+    // Assuming HH:MM format (24h or AM/PM, simple sort works for single day)
+    return new Date('1970/01/01 ' + a) - new Date('1970/01/01 ' + b);
+  });
+  
+  const datasets = [
+    { label: 'Critical', backgroundColor: '#ef4444', data: labels.map(l => timeMap[l].CRITICAL), borderRadius: 4 },
+    { label: 'High', backgroundColor: '#f97316', data: labels.map(l => timeMap[l].HIGH), borderRadius: 4 },
+    { label: 'Medium', backgroundColor: '#eab308', data: labels.map(l => timeMap[l].MEDIUM), borderRadius: 4 },
+    { label: 'Info/Low', backgroundColor: '#3b82f6', data: labels.map(l => timeMap[l].INFO + timeMap[l].LOW), borderRadius: 4 }
+  ];
+
+  const tlCtx = document.getElementById('timelineChart');
+  if (tlCtx) {
+    if (timelineChartInstance) timelineChartInstance.destroy();
+    timelineChartInstance = new Chart(tlCtx, {
+      type: 'bar',
+      data: { labels, datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { stacked: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+          y: { stacked: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8', stepSize: 1 } }
+        },
+        plugins: {
+          legend: { position: 'top', align: 'end', labels: { color: '#94a3b8', boxWidth: 12, usePointStyle: true } }
+        }
+      }
+    });
+  }
+
+  // Process data for Severity Doughnut Chart
+  const sevCounts = {CRITICAL:0, HIGH:0, MEDIUM:0, LOW:0, INFO:0};
+  alerts.forEach(a => { sevCounts[a.severity] = (sevCounts[a.severity] || 0) + 1; });
+  const totalCounts = [sevCounts.CRITICAL, sevCounts.HIGH, sevCounts.MEDIUM, sevCounts.LOW + sevCounts.INFO];
+
+  const sevCtx = document.getElementById('severityChart');
+  if (sevCtx) {
+    if (severityChartInstance) severityChartInstance.destroy();
+    severityChartInstance = new Chart(sevCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Critical', 'High', 'Medium', 'Other'],
+        datasets: [{
+          data: totalCounts,
+          backgroundColor: ['#ef4444', '#f97316', '#eab308', '#3b82f6'],
+          borderWidth: 0,
+          hoverOffset: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'right', labels: { color: '#94a3b8', usePointStyle: true, padding: 20 } }
+        },
+        cutout: '75%'
+      }
+    });
+  }
 }
 
 function updateAlertTable(alerts) {
