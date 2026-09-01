@@ -62,15 +62,21 @@ Kalki is **Log-Agnostic** because of the AI. It doesn't rely on strict log forma
 
 ---
 
-## 5. 📡 The Real-Time Endpoint Agent (`endpoint_agent.py`)
-To prove that Kalki works in the real world (and not just with simulated data), we built a **Live Windows Endpoint Agent**.
+## 5. 📡 Live Detection & Attack Simulation
+To prove that Kalki works in the real world (and not just with historical data), we built two independent data-injection scripts:
+
+### A. The Real-Time Endpoint Agent (`endpoint_agent.py`)
 - **The Concept:** Traditional SOCs use agents like Wazuh or CrowdStrike installed on laptops. Our script mimics this.
 - **How it works:** It continuously reads the Windows OS DNS cache (`ipconfig /displaydns`).
 - **The Flow:** 
   1. A user clicks a malicious link (e.g., Camphishing link hosted on a Cloudflare tunnel).
   2. The Windows OS resolves the domain and stores it in the DNS cache.
-  3. The `endpoint_agent.py` detects the new entry, formats it into a raw log, and sends a POST request to Kalki's API (`/api/v1/alerts`).
-  4. The **Triage Agent** instantly reads the log, flags the tunneling service as 'Medium/High' severity, and alerts the dashboard.
+  3. The `endpoint_agent.py` detects the new entry, formats it into a raw log, and sends it to Kalki's API.
+
+### B. The Malware Drive-By Simulation (`test_malware.py`)
+- **The Concept:** Judges often want to see how the system handles rapid, high-volume automated attacks.
+- **How it works:** This script simulates a "Drive-By Download" attack. It rapidly injects 12 synthetic Proxy logs indicating that an internal host (`192.168.1.55`) is downloading massive payload files (`150MB`) from a known malicious domain (`evil-malware-domain.xyz`).
+- **The Result:** The LLM instantly flags the rapid payload downloads as 'Critical' data exfiltration/malware infection. Kalki's correlation engine groups these 12 alerts into a single massive Incident rather than spamming the dashboard, proving the correlation engine works flawlessly.
 
 ---
 
