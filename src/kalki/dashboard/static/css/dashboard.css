@@ -19,7 +19,8 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-  background: var(--bg-primary);
+  background: linear-gradient(135deg, #000000 0%, #0a192f 50%, #172a45 100%);
+  background-attachment: fixed;
   color: var(--text-primary);
   min-height: 100vh;
   display: flex;
@@ -28,12 +29,15 @@ body {
 
 /* Header */
 .header {
-  background: var(--bg-secondary);
-  border-bottom: 2px solid var(--accent);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(59, 130, 246, 0.3);
   padding: 0.75rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 .header-left { display: flex; align-items: center; gap: 1rem; }
 .logo { font-size: 1.4rem; color: var(--accent); }
@@ -55,11 +59,19 @@ body {
   margin-bottom: 1.5rem;
 }
 .metric-card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
   padding: 1.25rem;
   text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.metric-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(59, 130, 246, 0.4);
 }
 .metric-card.critical { border-left: 3px solid var(--critical); }
 .metric-card.high { border-left: 3px solid var(--high); }
@@ -108,7 +120,8 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   border-bottom: 1px solid var(--border);
-  background: var(--bg-secondary);
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(4px);
   position: sticky;
   top: 0;
 }
@@ -172,8 +185,10 @@ body {
 
 /* Footer */
 .footer {
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--border);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
   padding: 0.75rem 2rem;
   display: flex;
   justify-content: space-between;
