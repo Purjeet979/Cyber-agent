@@ -185,7 +185,7 @@ body {
 .landing-overlay {
   position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(10,25,47,0.85) 50%, rgba(23,42,69,0.85) 100%);
+  background: #050a15; /* Solid color to block dashboard completely */
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -195,13 +195,13 @@ body {
 }
 
 .slideshow-bg {
-  position: fixed;
+  position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   background-size: cover;
   background-position: center;
   animation: slideshow 20s infinite;
-  opacity: 0.4;
+  opacity: 0.35;
   pointer-events: none;
 }
 
@@ -214,6 +214,8 @@ body {
 
 /* Landing Nav */
 .landing-nav {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -255,6 +257,8 @@ body {
 
 /* Hero Section */
 .landing-hero {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -264,6 +268,8 @@ body {
 
 /* About Section */
 .landing-about {
+  position: relative;
+  z-index: 1;
   padding: 4rem 2rem 8rem 2rem;
   max-width: 1100px;
   margin: 0 auto;
@@ -317,13 +323,15 @@ body {
 .landing-card-container {
   perspective: 1000px;
   width: 90%;
-  max-width: 600px;
+  max-width: 800px;
 }
 
 /* Glassmorphism & 3D Card */
 .landing-card {
-  background: #0f172a; /* Solid color, no translucency */
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 3rem;
   border-radius: 24px;
   text-align: center;
@@ -367,12 +375,12 @@ body {
 .marquee-container {
   overflow: hidden;
   white-space: nowrap;
-  background: transparent; /* Removed translucent background */
+  background: rgba(0, 0, 0, 0.3);
   border-radius: 12px;
   padding: 1rem 0;
   margin-bottom: 2.5rem;
   position: relative;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transform: translateZ(50px);
 }
 
@@ -388,12 +396,12 @@ body {
 
 .marquee-container::before {
   left: 0;
-  background: linear-gradient(to right, #0f172a, transparent);
+  background: linear-gradient(to right, rgba(15,23,42,0.8), transparent);
 }
 
 .marquee-container::after {
   right: 0;
-  background: linear-gradient(to left, #0f172a, transparent);
+  background: linear-gradient(to left, rgba(15,23,42,0.8), transparent);
 }
 
 .marquee-content {
