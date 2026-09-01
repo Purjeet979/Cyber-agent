@@ -322,14 +322,12 @@ body {
 
 /* Glassmorphism & 3D Card */
 .landing-card {
-  background: rgba(30, 41, 59, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: #0f172a; /* Solid color, no translucency */
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 3rem;
   border-radius: 24px;
   text-align: center;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
   transform-style: preserve-3d;
   animation: floatCard 6s ease-in-out infinite, rotate3d 10s linear infinite alternate;
   transition: transform 0.3s ease;
@@ -369,12 +367,12 @@ body {
 .marquee-container {
   overflow: hidden;
   white-space: nowrap;
-  background: rgba(0, 0, 0, 0.2);
+  background: transparent; /* Removed translucent background */
   border-radius: 12px;
   padding: 1rem 0;
   margin-bottom: 2.5rem;
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: none;
   transform: translateZ(50px);
 }
 
@@ -390,12 +388,12 @@ body {
 
 .marquee-container::before {
   left: 0;
-  background: linear-gradient(to right, #1e293b, transparent);
+  background: linear-gradient(to right, #0f172a, transparent);
 }
 
 .marquee-container::after {
   right: 0;
-  background: linear-gradient(to left, #1e293b, transparent);
+  background: linear-gradient(to left, #0f172a, transparent);
 }
 
 .marquee-content {
