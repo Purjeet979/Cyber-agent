@@ -51,7 +51,7 @@ dev = [
     "kalki[all]",
     "pytest>=7.0",
     "pytest-cov>=4.0",
-    "ruff>=0.4",
+    "ruff>=0.16.5",
 ]
 
 [project.scripts]
