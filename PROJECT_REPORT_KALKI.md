@@ -14,7 +14,8 @@ In traditional SOCs (Security Operations Centers), security analysts suffer from
 ## 2. 💻 Tech Stack
 Kalki is built using a modern, lightweight, and scalable stack:
 - **Backend Framework:** Python (Flask)
-- **Frontend UI:** HTML5, CSS3 (Modern Glassmorphism), JavaScript (Fetch API / WebSockets)
+- **Frontend UI:** HTML5, CSS3 (Modern Glassmorphism), JavaScript
+- **Real-Time Communication:** WebSockets (`flask-sock`) for instant, bi-directional live updates without page reloads.
 - **AI Brain (LLM):** Groq API (Running Meta's Llama-3 model for lightning-fast inference)
 - **Database:** SQLite (In-Memory for real-time demo performance)
 - **Data Standard:** OCSF (Open Cybersecurity Schema Framework) for normalizing logs.
@@ -73,7 +74,17 @@ To prove that Kalki works in the real world (and not just with simulated data), 
 
 ---
 
-## 6. 🏆 Why This Wins Hackathons (Your USP)
+## 6. ⚡ The Real-Time Architecture (WebSockets)
+A traditional dashboard requires the user to constantly refresh the page (or uses heavy AJAX polling) to see new alerts. Kalki is built for speed.
+- **What it does:** The dashboard updates instantly the millisecond an attack is detected, without the user ever clicking "refresh".
+- **How it does it (The Tech):** We implemented **WebSockets** using `flask-sock`. 
+  1. When the dashboard loads, it opens a persistent WebSocket connection to the server (`/ws/alerts`).
+  2. As soon as the `endpoint_agent.py` sends a new log and the Triage LLM finishes analyzing it, the backend pushes the JSON result directly through the active WebSocket channel.
+  3. The JavaScript on the frontend intercepts this message and dynamically injects a new row into the Alert Feed table. This creates a true, live "hacker movie" feel during the demo.
+
+---
+
+## 7. 🏆 Why This Wins Hackathons (Your USP)
 1. **Zero-Rule Engine:** Competitors use hardcoded `if-else` rules and Regex to find threats. Kalki uses **Cognitive AI (LLM)**. If a hacker slightly changes their attack pattern, rule-based systems fail. Kalki still catches it because it understands the *intent* of the log.
 2. **Real-time Live Demo:** You aren't just showing a slideshow; you are clicking a live phishing link and showing the AI catching it within 3 seconds on a beautiful dashboard.
 3. **Correlation over Alerting:** Kalki proves it understands enterprise security by prioritizing "Incidents" (Correlated Attacks) over spamming "Alerts", solving the biggest problem in the industry today.
