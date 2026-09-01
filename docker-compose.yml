@@ -1,9 +1,9 @@
 version: "3.9"
 
 services:
-  sentinelforge:
+  kalki:
     build: .
-    container_name: sentinelforge
+    container_name: kalki
     ports:
       - "5000:5000"
     volumes:
@@ -11,7 +11,7 @@ services:
       - ./playbooks:/app/playbooks:ro
     environment:
       - FLASK_ENV=production
-      - SENTINELFORGE_LOG_LEVEL=INFO
+      - KALKI_LOG_LEVEL=INFO
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/api/v1/metrics"]
@@ -23,11 +23,11 @@ services:
   # Optional: Run demo data loader on startup
   demo-loader:
     build: .
-    container_name: sentinelforge-demo
+    container_name: kalki-demo
     depends_on:
-      sentinelforge:
+      kalki:
         condition: service_healthy
     command: >
-      sh -c "sleep 5 && sentinelforge demo"
+      sh -c "sleep 5 && kalki demo"
     profiles:
       - demo
