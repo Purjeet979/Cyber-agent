@@ -1,6 +1,7 @@
 <div align="center">
   <h1>🛡️ Kalki</h1>
   <p><b>Autonomous SOC Analyst Platform</b></p>
+  <p><b> SIH internal hackathon </b></p>
   <p><i>Next-Generation Agentic AI for Cybersecurity Threat Detection & Response</i></p>
 </div>
 
